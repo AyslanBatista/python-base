@@ -1,4 +1,4 @@
-#!/usr/bin/env /home/ayslan/Documentos/Virtual_Env_Python/PythonBase/bin/python3
+#!/usr/bin/env python3
 
 """Hello Wordl Multi Linguas.
 
@@ -25,7 +25,7 @@ __license__ = "Unlicense"
 # os >> Serve para ter acessos ao sistema operacional
 import os
 
-# pegando apenas os 5 primeiros caracter da variavel, mesmo que a variavel não exista ele ira retorna o padrão em ingles
+# [:5] pegando apenas os 5 primeiros caracter da variavel | "en_US" mesmo que a variável não exista ele ira retorna o padrão em inglês
 current_language = os.getenv("LANG", "en_US")[:5]
 # snake case
 
