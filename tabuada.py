@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Impreme a tabuada do 1 ao 10
+"""Imprime a tabuada do 1 ao 10
 
 Tabuada do: 1
 1 x 1 = 1
