@@ -29,4 +29,4 @@ for numero in numeros:
     print(f"Tabuada do: {numero}")
     for outro_numero in numeros:
         print(f"{numero} x {outro_numero} = {numero * outro_numero}")
-    print("-------------------------")
+    print("-" * 25)
