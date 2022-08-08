@@ -23,23 +23,21 @@ __license__ = "Unlicense"
 
 # numeros = [1,2,3,4,5,6,7,8,9,10]
 # Transformando uma range em uma lista, range("inicio", "termino")
-numeros = list(range(1,11))
+numeros = list(range(1, 11))
 
 # Iterable (percorriveis)
 
 # para cada numero em numeros:
-'''Sem template'''
-for n1 in numeros :
+"""Sem template"""
+for n1 in numeros:
     print("{:-^18}".format(f"Tabuada do {n1}"), "\n")
     for n2 in numeros:
         resultado = n1 * n2
         print("{:^18}".format(f"{n1} x {n2} = {resultado}"))
-    
-    print("#" * 18,"\n")
-    
+    print("#" * 18, "\n")
 
 
-'''Utilizando template'''
+"""Utilizando template"""
 # template = """
 # ---Tabuada do: {numero}---
 
@@ -52,5 +50,5 @@ for n1 in numeros :
 #     bloco = ""
 #     for n2 in numeros:
 #         resultado = n1 * n2
-#         bloco += f"    {n1} x {n2} = {resultado}\n" 
+#         bloco += f"    {n1} x {n2} = {resultado}\n"
 #     print(template.format(numero=n1, bloco=bloco))
