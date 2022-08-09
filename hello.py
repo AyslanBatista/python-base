@@ -19,7 +19,7 @@ Execução:
     
 """
 __version__ = "0.0.1"
-__author__ = "Ayslan Batista"
+__author__ = "Ayslan"
 __license__ = "Unlicense"
 
 # os >> Serve para ter acessos ao sistema operacional
