@@ -28,9 +28,10 @@ compra = {
     "quantidade": 3,
 }
 
-total_compra = compra[2] * produto["preco"]
+total_compra = compra["quantidade"] * compra["produto"]["preco"]
 
-print(
+pprint(
     f"O cliente {compra['cliente']['nome']} "
+    f"comprou {compra['quantidade']} unidades de {compra['produto']['nome']} "
     f"e pagou o total de {total_compra}"
     )
