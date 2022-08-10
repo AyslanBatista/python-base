@@ -4,7 +4,7 @@
 Imprimir a lista de crianças agrupadas por sala
 que frequenta cada uma das atividades.
 """
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 __author__ = "Ayslan"
 __license__ = "Unlicense"
 
@@ -27,8 +27,8 @@ atividades = {
     "Dança": aulas["aula_danca"],
     }
 
-# Listar alunos em cada atividade por sala
 
+# Listar alunos em cada atividade por sala
 for nome_atividade, atividade in atividades.items():
     print("{:^55}".format(f"Alunos da atividade {nome_atividade}"))
     print("-" * 55)
