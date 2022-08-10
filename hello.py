@@ -18,16 +18,42 @@ Execução:
     ./hello.py
     
 """
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 __author__ = "Ayslan"
 __license__ = "Unlicense"
 
 # os >> Serve para ter acessos ao sistema operacional
 import os
+import sys
+
+# DEBUG
+# Comando abaixo serve para pegar todo informação que for passada na linha de comando ao rodar o programa
+# print(f"{sys.argv=}")
+
+arguments = {
+    "lang": None,
+    "count": 1,
+}
+
+for arg in sys.argv[1:]:
+    # TODO: Tratar ValueError
+    #Desempacotando os valores e depois separando pelo "=" os argumentos que são passados ao rodar o programa
+    key, value = arg.split("=")
+    
+    #lstrip removendo os "-" do começo, strip() Removendo os espaços em branco
+    key = key.lstrip("-").strip()
+    value = value.strip()
+    
+    # Validando os argumentos que são passados, caso não seja um agumento que não esteja em arguments retorna um erro
+    if key not in arguments:
+        print(f"Invalid Option `{key}`")
+        sys.exit()
+    arguments[key] = value
 
 # [:5] pegando apenas os 5 primeiros caracter da variavel | "en_US" mesmo que a variável não exista ele ira retorna o padrão em inglês
-current_language = os.getenv("LANG", "en_US")[:5]
-# snake case
+current_language = arguments["lang"]
+if current_language is None:
+    os.getenv("LANG", "en_US")[:5]
 
 # sets (Hash Table) - O(1) - constante
 # dicts (Hash Table)
@@ -42,4 +68,4 @@ msg = {
 
 
 # 0(1) - constante - 'in' - Get item
-print(msg[current_language])
+print(msg[current_language] * int(arguments["count"]))
