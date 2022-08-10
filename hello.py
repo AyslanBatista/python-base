@@ -11,6 +11,10 @@ Tenha a variável LANG devidamente configurada ex:
 
     export LANG=pt_BR
     
+Ou informe atraves do CLI argument `--lang'.
+
+Ou o usuário terá que digitar.
+
 Execução:
 
     python3 hello.py
@@ -44,7 +48,7 @@ for arg in sys.argv[1:]:
     key = key.lstrip("-").strip()
     value = value.strip()
     
-    # Validando os argumentos que são passados, caso não seja um agumento que não esteja em arguments retorna um erro
+    # Validando os argumentos que são passados, caso não seja um agumento que não esteja no dict arguments retorna um erro
     if key not in arguments:
         print(f"Invalid Option `{key}`")
         sys.exit()
@@ -53,7 +57,15 @@ for arg in sys.argv[1:]:
 # [:5] pegando apenas os 5 primeiros caracter da variavel | "en_US" mesmo que a variável não exista ele ira retorna o padrão em inglês
 current_language = arguments["lang"]
 if current_language is None:
-    os.getenv("LANG", "en_US")[:5]
+    # TODO: Usar repetição
+    if "LANG" in os.environ:
+        current_language = os.getenv("LANG")
+    else:
+        current_language = input(
+            "Choose a language:\n"
+        )
+    
+current_language = current_language[:5]
 
 # sets (Hash Table) - O(1) - constante
 # dicts (Hash Table)
