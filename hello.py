@@ -32,13 +32,12 @@ current_language = os.getenv("LANG", "en_US")[:5]
 # sets (Hash Table) - O(1) - constante
 # dicts (Hash Table)
 
-msg ={
-  "en_US": "Hello, World!",
-  "pt_BR": "Olá, Mundo!",
-  "it_IT": "Ciao, Mondo!",
-  "es_SP": "Hola, Mundo!",
-  "fr_FR": "Bonjour, Monde!"
-  
+msg = {
+    "en_US": "Hello, World!",
+    "pt_BR": "Olá, Mundo!",
+    "it_IT": "Ciao, Mondo!",
+    "es_SP": "Hola, Mundo!",
+    "fr_FR": "Bonjour, Monde!",
 }
 
 
