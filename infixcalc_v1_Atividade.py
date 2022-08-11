@@ -36,6 +36,7 @@ arguments = {
     "valores": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
 }
 
+
 # Validação dos dados que são passados no momento de rodar o programa,
 # Caso esteja tudo OK!, ele roda o programa
 if len(sys.argv) > 1:
@@ -55,22 +56,26 @@ if len(sys.argv) > 1:
             sys.exit()
     else:
         if "." in sys.argv[2]:
-            float(sys.argv[2])
-        elif "." in sys.argv[3]:
-            float(sys.argv[3])
+            n1 = float(sys.argv[2])
         else:
-            if sys.argv[1] == "sum":
-                print(f"{int(sys.argv[2]) + int(sys.argv[3])}")
-                sys.exit()
-            elif sys.argv[1] == "sub":
-                print(f"{int(sys.argv[2]) - int(sys.argv[3])}")
-                sys.exit()
-            elif sys.argv[1] == "mul":
-                print(f"{int(sys.argv[2]) * int(sys.argv[3])}")
-                sys.exit()
-            elif sys.argv[1] == "div":
-                print(f"{int(sys.argv[2]) / int(sys.argv[3])}")
-                sys.exit()
+            n1 = int(sys.argv[2])
+        if "." in sys.argv[3]:
+            n2 = float(sys.argv[3])
+        else:
+            n2 = int(sys.argv[3])
+
+        if sys.argv[1] == "sum":
+            print(f"{n1 + n2}")
+            sys.exit()
+        elif sys.argv[1] == "sub":
+            print(f"{n1 - n2}")
+            sys.exit()
+        elif sys.argv[1] == "mul":
+            print(f"{n1 * n2}")
+            sys.exit()
+        elif sys.argv[1] == "div":
+            print(f"{n1 / n2}")
+            sys.exit()
 
 
 # Input do Usuário com Validação dos dados
