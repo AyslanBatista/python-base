@@ -39,7 +39,10 @@ arguments = {
 # Validação dos dados que são passados no momento de rodar o programa,
 # Caso esteja tudo OK!, ele roda o programa
 if len(sys.argv) > 1:
-    if sys.argv[1] not in arguments["operacoes"]:
+    if len(sys.argv[1:]) != 3:
+        print(f"Invalid Option `{sys.argv[4:]}`")
+        sys.exit()
+    elif sys.argv[1] not in arguments["operacoes"]:
         print(f"Invalid Option `{sys.argv[1]}`")
         sys.exit()
     for op in sys.argv[2]:
@@ -76,13 +79,13 @@ for n in n1:
     if n not in arguments["valores"]:
         print(f"Invalid Option `{n}`")
         sys.exit()
-        
+
 n2 = input("n2: ")
 for n in n2:
     if n not in arguments["valores"]:
         print(f"Invalid Option `{n}`")
         sys.exit()
-        
+
 
 # Resultado
 if operacao == "sum":
