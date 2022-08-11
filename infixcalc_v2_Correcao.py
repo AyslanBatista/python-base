@@ -23,13 +23,16 @@ operação: sum
 n1: 5
 n2: 4
 9
+
+Os resultados serão salvos em `infixcalc.log`
 """
 __version__ = "0.2.0"
 __author__ = "Ayslan"
 __license__ = "Unlicense"
 
+import os
 import sys
-from unittest import result
+from datetime import datetime
 
 arguments = sys.argv[1:]
 
@@ -38,14 +41,14 @@ if not arguments:
     operation = input("Operação: ")
     n1 = input("n1: ")
     n2 = input("n2: ")
-    arguments = [operation, n1 ,n2]
-    
+    arguments = [operation, n1, n2]
+
 
 if len(arguments) != 3:
     print("Número de argumentos inválidos")
     print("ex: `sum 5 5`")
     sys.exit(1)
-    
+
 operation, *nums = arguments
 
 valid_operations = ("sum", "sub", "mul", "div")
@@ -66,7 +69,7 @@ for num in nums:
         num = float(num)
     else:
         num = int(num)
-    
+
     validated_nums.append(num)
 
 n1, n2 = validated_nums
@@ -80,5 +83,22 @@ elif operation == "mul":
     result = n1 * n2
 elif operation == "div":
     result = n1 / n2
+
+# Diretorio atual
+path = os.curdir
+# Criando um arquivo e salvando o caminho
+filepath = os.path.join(path, "infixcalc.log")
+# Horario que foi executado
+timestamp = datetime.now().isoformat()
+# Usuario que está executando o comando
+user = os.getenv('USER', 'anonymous')
+
+
+# Editando o arquivo com o resultado do calculo
+with open(filepath, "a") as file_:
+    file_.write(f"{timestamp} - {user} - {operation},{n1},{n2} = {result}\n")
+
+# Segundo metodo que não é muito utilizado
+# print(f"{operation},{n1},{n2} = {result}", file=open(filepath, "a"))
 
 print(f"O resultado é {result}")
