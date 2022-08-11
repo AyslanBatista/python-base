@@ -45,27 +45,32 @@ if len(sys.argv) > 1:
     elif sys.argv[1] not in arguments["operacoes"]:
         print(f"Invalid Option `{sys.argv[1]}`")
         sys.exit()
-    for op in sys.argv[2]:
+    for op in sys.argv[2].replace(".", ""):
         if op not in arguments["valores"]:
             print(f"Invalid Option `{sys.argv[2]}`")
             sys.exit()
-    for op in sys.argv[3]:
+    for op in sys.argv[3].replace(".", ""):
         if op not in arguments["valores"]:
             print(f"Invalid Option `{sys.argv[3]}`")
             sys.exit()
     else:
-        if sys.argv[1] == "sum":
-            print(f"{int(sys.argv[2]) + int(sys.argv[3])}")
-            sys.exit()
-        elif sys.argv[1] == "sub":
-            print(f"{int(sys.argv[2]) - int(sys.argv[3])}")
-            sys.exit()
-        elif sys.argv[1] == "mul":
-            print(f"{int(sys.argv[2]) * int(sys.argv[3])}")
-            sys.exit()
-        elif sys.argv[1] == "div":
-            print(f"{int(sys.argv[2]) / int(sys.argv[3])}")
-            sys.exit()
+        if "." in sys.argv[2]:
+            float(sys.argv[2])
+        elif "." in sys.argv[3]:
+            float(sys.argv[3])
+        else:
+            if sys.argv[1] == "sum":
+                print(f"{int(sys.argv[2]) + int(sys.argv[3])}")
+                sys.exit()
+            elif sys.argv[1] == "sub":
+                print(f"{int(sys.argv[2]) - int(sys.argv[3])}")
+                sys.exit()
+            elif sys.argv[1] == "mul":
+                print(f"{int(sys.argv[2]) * int(sys.argv[3])}")
+                sys.exit()
+            elif sys.argv[1] == "div":
+                print(f"{int(sys.argv[2]) / int(sys.argv[3])}")
+                sys.exit()
 
 
 # Input do Usuário com Validação dos dados
@@ -75,13 +80,13 @@ if operacao not in arguments["operacoes"]:
     sys.exit()
 
 n1 = input("n1: ")
-for n in n1:
+for n in n1.replace(".", ""):
     if n not in arguments["valores"]:
         print(f"Invalid Option `{n}`")
         sys.exit()
 
 n2 = input("n2: ")
-for n in n2:
+for n in n2.replace(".", ""):
     if n not in arguments["valores"]:
         print(f"Invalid Option `{n}`")
         sys.exit()
