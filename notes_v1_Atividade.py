@@ -30,7 +30,11 @@ keys = "tag"
 if not arguments:
     print("Invalid usage")
     sys.exit(1)
-
+   
+if len(arguments) != 2:
+    print(f"Invalid usage `{sys.argv[3:]}`")
+    sys.exit(1)
+    
 if arguments[0] not in cmds:
     print(f"Invalid command {arguments[0]}")
 
@@ -44,13 +48,18 @@ if arguments[0] == "read":
     # Validação dos argumentos que foram passados
     if key not in keys:
         print(f"Invalid Option `{key}`")
-        sys.exit()
+        sys.exit(1)
 
     # Buscando a chave key e printando o valor text
-    print(open(filepath).read())
-    for line in filepath:
-        print(line)
-
+    for line in open(filepath).readlines():
+        if value in line:
+            line_titulo, line_tag, line_text = line.split(";")
+            print(
+                f"""{line_titulo}\n{line_tag}\n{line_text}"""
+            )
+            sys.exit(0)
+    print(f"Tag `{value}` Not Found")
+    sys.exit(1)
 
 if arguments[0] == "new":
     # Criacao da nota
