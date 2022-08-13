@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import logging
 import os
+from logging import handlers
 
 #BOILERPLATE
 # TODO: usar função
@@ -10,16 +11,25 @@ log_level = os.getenv("LOG_LEVEL", "WARNING").upper()
 # Nossa instancia de log
 log = logging.Logger("ayslan", log_level)
 # level
-ch = logging.StreamHandler() #ConsoleLog = lugar onde será exibido, no caso sera terminal/stderr
+#ch = logging.StreamHandler() #ConsoleLog = lugar onde será exibido, no caso sera terminal/stderr
 
-ch.setLevel(log_level) #Nivel que será exibido
+fh = handlers.RotatingFileHandler(
+    "meulog.log", #Nome do arquivo
+    maxBytes=10**6,#maxBytes = 10**6 >> Tamanho maximo do arquivo, depois disso ele cria outro arquivo
+    backupCount=10 #backupCount=10 >> Quantidade de arquivos para manter no backup
+    ) 
+
+#ch.setLevel(log_level) #Nivel que será exibido
+fh.setLevel(log_level)
 # formatacao
 fmt = logging.Formatter(
     '%(asctime)s %(name)s %(levelname)s l:%(lineno)d f:%(filename)s: %(message)s'
 )
-ch.setFormatter(fmt) # Adicionando a formatação de log
+#ch.setFormatter(fmt) # Adicionando a formatação de log
+fh.setFormatter(fmt)
 # destino
-log.addHandler(ch)
+#log.addHandler(ch)
+log.addHandler(fh)
 
 # root logger
 """

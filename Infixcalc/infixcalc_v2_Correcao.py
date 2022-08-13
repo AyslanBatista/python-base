@@ -34,16 +34,21 @@ import logging
 import os
 import sys
 from datetime import datetime
+from logging import handlers
 
 log_level = os.getenv("LOG_LEVEL", "WARNING").upper()
 log = logging.Logger("ayslan", log_level)
-ch = logging.StreamHandler()  # ConsoleLog = lugar onde será exibido
-ch.setLevel(log_level)  # Nivel que será exibido
+fh = handlers.RotatingFileHandler(
+    "infixcalc.log", #Nome do arquivo
+    maxBytes=10**6,#maxBytes = 10**6 >> Tamanho maximo do arquivo, depois disso ele cria outro arquivo
+    backupCount=10 #backupCount=10 >> Quantidade de arquivos para manter no backup
+    ) 
+fh.setLevel(log_level)  # Nivel que será exibido
 fmt = logging.Formatter(
     "%(asctime)s %(name)s %(levelname)s l:%(lineno)d f:%(filename)s: %(message)s"
 )
-ch.setFormatter(fmt)  # Adicionando a formatação de log
-log.addHandler(ch)
+fh.setFormatter(fmt)  # Adicionando a formatação de log
+log.addHandler(fh)
 
 arguments = sys.argv[1:]
 
@@ -53,10 +58,10 @@ if not arguments:
     n1 = input("n1: ")
     n2 = input("n2: ")
     arguments = [operation, n1, n2]
-elif len(arguments) != 3:
-    print("Número de argumentos inválidos")
-    print("ex: `sum 5 5`")
-    sys.exit(1)
+# elif len(arguments) != 3:
+#     print("Número de argumentos inválidos")
+#     print("ex: `sum 5 5`")
+#     sys.exit(1)
 
 operation, *nums = arguments
 
@@ -81,10 +86,13 @@ for num in nums:
 
     validated_nums.append(num)
 
+
 try:
     n1, n2 = validated_nums
 except ValueError as e:
-    print(str(e))
+    log.error("%s",str(e))
+    print("Número de argumentos inválidos")
+    print("ex: `sum 5 5`")
     sys.exit(1)
 
 # TODO: usar dict de funcoes
@@ -100,7 +108,7 @@ elif operation == "div":
 # Diretorio atual
 path = os.curdir
 # Criando um arquivo e salvando o caminho
-filepath = os.path.join(path, "infixcalc.log")
+filepath = os.path.join(path, "historico.log")
 # Horario que foi executado
 timestamp = datetime.now().isoformat()
 # Usuario que está executando o comando
@@ -114,7 +122,7 @@ try:
             f"{timestamp} - {user} - {operation},{n1},{n2} = {result}\n"
         )
 except PermissionError as e:
-    # TODO: logging
+    log.error("%s", str(e))
     print(str(e))
     sys.exit(1)
 
