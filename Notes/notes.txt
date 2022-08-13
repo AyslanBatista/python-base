@@ -2,3 +2,5 @@ titulo:Minha Nota;tag:tech;text:Anotacao geral sobre carreira de tecnologia
 titulo:Minha Nota;tag:test;text:testando essa bagaça aqui
 titulo:Minha Nota;tag:test;text:Testando para ver se essa bagaça está funcionando
 Minha segunda nota	geral	Minha nota 1
+new	test	testando
+new	test	test

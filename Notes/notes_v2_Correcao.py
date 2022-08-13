@@ -31,8 +31,12 @@ if not arguments:
     print(f"you must specity subcommand {cmds}")
     sys.exit(1)
     
-if arguments[0] not in cmds:
+elif arguments[0] not in cmds:
     print(f"Invalid command {arguments[0]}")
+    
+elif len(arguments) != 2:
+    print(f"Invalid usage `{sys.argv[3:]}`")
+    sys.exit(1)
 
 if arguments[0] == "read":
     # Leitura das notas
@@ -46,7 +50,7 @@ if arguments[0] == "read":
 
 if arguments[0] == "new":
     # Criacao da nota
-    title = arguments[1] # TODO: Tratar exception
+    title = arguments[1] 
     text = [
         f"{title}",
         input("tag:").strip(),

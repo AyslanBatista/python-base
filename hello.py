@@ -40,10 +40,17 @@ arguments = {
 }
 
 for arg in sys.argv[1:]:
-    # TODO: Tratar ValueError
     #Desempacotando os valores e depois separando pelo "=" os argumentos que são passados ao rodar o programa
-    key, value = arg.split("=")
-    
+    try:
+        key, value = arg.split("=")
+    except ValueError as e:
+        # TODO: Logging
+        print(f"[ERROR] {str(e)}")
+        print("You need to use `=`")
+        print(f"You passed {arg}")
+        print(f"try with --key=value")
+        sys.exit(1)
+        
     #lstrip removendo os "-" do começo, strip() Removendo os espaços em branco
     key = key.lstrip("-").strip()
     value = value.strip()
@@ -78,6 +85,23 @@ msg = {
     "fr_FR": "Bonjour, Monde!",
 }
 
+# try, execept with value default
+# message = msg.get(current_language, msg["en_US"])
+
+# LBYL
+# if current_language in msg:
+#     massage = msg[current_language]
+# else:
+#     print(f"Language is invalid, chose from: {list(msg.keys())}")
+#     sys.exit(1)
+
+#EAFP
+try:
+    massage = msg[current_language]
+except KeyError as e:
+    print(f"[ERROR] {str(e)}")
+    print(f"Language is invalid, chose from: {list(msg.keys())}")
+    sys.exit(1)
 
 # 0(1) - constante - 'in' - Get item
-print(msg[current_language] * int(arguments["count"]))
+print(massage * int(arguments["count"]))
