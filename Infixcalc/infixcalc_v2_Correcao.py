@@ -36,13 +36,15 @@ import sys
 from datetime import datetime
 from logging import handlers
 
+# CONFIGURAÇÂO DO LOG
 log_level = os.getenv("LOG_LEVEL", "WARNING").upper()
 log = logging.Logger("ayslan", log_level)
 fh = handlers.RotatingFileHandler(
-    "infixcalc.log", #Nome do arquivo
-    maxBytes=10**6,#maxBytes = 10**6 >> Tamanho maximo do arquivo, depois disso ele cria outro arquivo
-    backupCount=10 #backupCount=10 >> Quantidade de arquivos para manter no backup
-    ) 
+    "infixcalc.log",  # Nome do arquivo
+    maxBytes=10
+    ** 6,  # maxBytes = 10**6 >> Tamanho maximo do arquivo, depois disso ele cria outro arquivo
+    backupCount=10,  # backupCount=10 >> Quantidade de arquivos para manter no backup
+)
 fh.setLevel(log_level)  # Nivel que será exibido
 fmt = logging.Formatter(
     "%(asctime)s %(name)s %(levelname)s l:%(lineno)d f:%(filename)s: %(message)s"
@@ -50,6 +52,7 @@ fmt = logging.Formatter(
 fh.setFormatter(fmt)  # Adicionando a formatação de log
 log.addHandler(fh)
 
+# Variavel
 arguments = sys.argv[1:]
 
 # Validacao
@@ -58,10 +61,6 @@ if not arguments:
     n1 = input("n1: ")
     n2 = input("n2: ")
     arguments = [operation, n1, n2]
-# elif len(arguments) != 3:
-#     print("Número de argumentos inválidos")
-#     print("ex: `sum 5 5`")
-#     sys.exit(1)
 
 operation, *nums = arguments
 
@@ -86,14 +85,15 @@ for num in nums:
 
     validated_nums.append(num)
 
-
+# Exceot
 try:
     n1, n2 = validated_nums
 except ValueError as e:
-    log.error("%s",str(e))
+    log.error("%s", str(e))
     print("Número de argumentos inválidos")
     print("ex: `sum 5 5`")
     sys.exit(1)
+
 
 # TODO: usar dict de funcoes
 if operation == "sum":
@@ -128,5 +128,4 @@ except PermissionError as e:
 
 # Segundo metodo que não é muito utilizado
 # print(f"{operation},{n1},{n2} = {result}", file=open(filepath, "a"))
-
 print(f"O resultado é {result}")
