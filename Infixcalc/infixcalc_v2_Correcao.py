@@ -30,9 +30,20 @@ __version__ = "0.2.0"
 __author__ = "Ayslan"
 __license__ = "Unlicense"
 
+import logging
 import os
 import sys
 from datetime import datetime
+
+log_level = os.getenv("LOG_LEVEL", "WARNING").upper()
+log = logging.Logger("ayslan", log_level)
+ch = logging.StreamHandler()  # ConsoleLog = lugar onde será exibido
+ch.setLevel(log_level)  # Nivel que será exibido
+fmt = logging.Formatter(
+    "%(asctime)s %(name)s %(levelname)s l:%(lineno)d f:%(filename)s: %(message)s"
+)
+ch.setFormatter(fmt)  # Adicionando a formatação de log
+log.addHandler(ch)
 
 arguments = sys.argv[1:]
 
@@ -75,7 +86,7 @@ try:
 except ValueError as e:
     print(str(e))
     sys.exit(1)
-    
+
 # TODO: usar dict de funcoes
 if operation == "sum":
     result = n1 + n2
@@ -93,13 +104,15 @@ filepath = os.path.join(path, "infixcalc.log")
 # Horario que foi executado
 timestamp = datetime.now().isoformat()
 # Usuario que está executando o comando
-user = os.getenv('USER', 'anonymous')
+user = os.getenv("USER", "anonymous")
 
 
 # Editando o arquivo com o resultado do calculo
 try:
     with open(filepath, "a") as file_:
-        file_.write(f"{timestamp} - {user} - {operation},{n1},{n2} = {result}\n")
+        file_.write(
+            f"{timestamp} - {user} - {operation},{n1},{n2} = {result}\n"
+        )
 except PermissionError as e:
     # TODO: logging
     print(str(e))
