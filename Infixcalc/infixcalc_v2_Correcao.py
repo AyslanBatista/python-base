@@ -52,80 +52,87 @@ fmt = logging.Formatter(
 fh.setFormatter(fmt)  # Adicionando a formatação de log
 log.addHandler(fh)
 
-# Variavel
-arguments = sys.argv[1:]
 
-# Validacao
-if not arguments:
-    operation = input("Operação: ")
-    n1 = input("n1: ")
-    n2 = input("n2: ")
-    arguments = [operation, n1, n2]
 
-operation, *nums = arguments
+while True:
+    
+    # Variavel
+    arguments = sys.argv[1:]
+    # Validacao
+    if not arguments:
+        operation = input("Operação: ")
+        n1 = input("n1: ")
+        n2 = input("n2: ")
+        arguments = [operation, n1, n2]
 
-valid_operations = ("sum", "sub", "mul", "div")
+    operation, *nums = arguments
 
-if operation not in valid_operations:
-    print("Operação inválida")
-    print(valid_operations)
-    sys.exit(1)
+    valid_operations = ("sum", "sub", "mul", "div")
 
-validated_nums = []
-for num in nums:
-    # Verificando se o valor que foi passado é um numero
-    # TODO: Repitição while + exceptions
-    if not num.replace(".", "").isdigit():
-        print(f"Número inválido {num}")
+    if operation not in valid_operations:
+        print("Operação inválida")
+        print(valid_operations)
         sys.exit(1)
-    if "." in num:
-        num = float(num)
-    else:
-        num = int(num)
 
-    validated_nums.append(num)
+    validated_nums = []
+    for num in nums:
+        # Verificando se o valor que foi passado é um numero
+        # TODO: Repitição while + exceptions
+        if not num.replace(".", "").isdigit():
+            print(f"Número inválido {num}")
+            sys.exit(1)
+        if "." in num:
+            num = float(num)
+        else:
+            num = int(num)
 
-# Exceot
-try:
-    n1, n2 = validated_nums
-except ValueError as e:
-    log.error("%s", str(e))
-    print("Número de argumentos inválidos")
-    print("ex: `sum 5 5`")
-    sys.exit(1)
+        validated_nums.append(num)
 
-
-# TODO: usar dict de funcoes
-if operation == "sum":
-    result = n1 + n2
-elif operation == "sub":
-    result = n1 - n2
-elif operation == "mul":
-    result = n1 * n2
-elif operation == "div":
-    result = n1 / n2
-
-# Diretorio atual
-path = os.curdir
-# Criando um arquivo e salvando o caminho
-filepath = os.path.join(path, "historico.log")
-# Horario que foi executado
-timestamp = datetime.now().isoformat()
-# Usuario que está executando o comando
-user = os.getenv("USER", "anonymous")
+    # Exceot
+    try:
+        n1, n2 = validated_nums
+    except ValueError as e:
+        log.error("%s", str(e))
+        print("Número de argumentos inválidos")
+        print("ex: `sum 5 5`")
+        sys.exit(1)
 
 
-# Editando o arquivo com o resultado do calculo
-try:
-    with open(filepath, "a") as file_:
-        file_.write(
-            f"{timestamp} - {user} - {operation},{n1},{n2} = {result}\n"
-        )
-except PermissionError as e:
-    log.error("%s", str(e))
-    print(str(e))
-    sys.exit(1)
+    # TODO: usar dict de funcoes
+    if operation == "sum":
+        result = n1 + n2
+    elif operation == "sub":
+        result = n1 - n2
+    elif operation == "mul":
+        result = n1 * n2
+    elif operation == "div":
+        result = n1 / n2
 
-# Segundo metodo que não é muito utilizado
-# print(f"{operation},{n1},{n2} = {result}", file=open(filepath, "a"))
-print(f"O resultado é {result}")
+    print(f"O resultado é {result}")
+    
+    # Diretorio atual
+    path = os.curdir
+    # Criando um arquivo e salvando o caminho
+    filepath = os.path.join(path, "historico.log")
+    # Horario que foi executado
+    timestamp = datetime.now().isoformat()
+    # Usuario que está executando o comando
+    user = os.getenv("USER", "anonymous")
+
+
+    # Editando o arquivo com o resultado do calculo
+    try:
+        with open(filepath, "a") as file_:
+            file_.write(
+                f"{timestamp} - {user} - {operation},{n1},{n2} = {result}\n"
+            )
+    except PermissionError as e:
+        log.error("%s", str(e))
+        print(str(e))
+        sys.exit(1)
+
+    # Segundo metodo que não é muito utilizado
+    # print(f"{operation},{n1},{n2} = {result}", file=open(filepath, "a"))
+    
+    if input("Pressione enter para continuar, qualquer tecla para sair"):
+        break

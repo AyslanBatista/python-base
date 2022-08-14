@@ -30,11 +30,11 @@ keys = "tag"
 if not arguments:
     print("Invalid usage")
     sys.exit(1)
-   
+
 if len(arguments) != 2:
     print(f"Invalid usage `{sys.argv[3:]}`")
     sys.exit(1)
-    
+
 if arguments[0] not in cmds:
     print(f"Invalid command {arguments[0]}")
 
@@ -54,9 +54,7 @@ if arguments[0] == "read":
     for line in open(filepath).readlines():
         if value in line:
             line_titulo, line_tag, line_text = line.split(";")
-            print(
-                f"""{line_titulo}\n{line_tag}\n{line_text}"""
-            )
+            print(f"""{line_titulo}\n{line_tag}\n{line_text}""")
             sys.exit(0)
     print(f"Tag `{value}` Not Found")
     sys.exit(1)

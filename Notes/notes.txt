@@ -1,6 +1,30 @@
-titulo:Minha Nota;tag:tech;text:Anotacao geral sobre carreira de tecnologia
-titulo:Minha Nota;tag:test;text:testando essa bagaça aqui
-titulo:Minha Nota;tag:test;text:Testando para ver se essa bagaça está funcionando
-Minha segunda nota	geral	Minha nota 1
-new	test	testando
-new	test	test
+Minha Nota	tec	Testando essa bagaça
+Minha terceira nota	test	eita
+Repete	while	Repetindo com while
+Meu post legal	tagzinha	tamo ai testando dnv
+Meu post legal	testando	perai
+Meu post legal	test	ta dificil
+Meu post legal	test	vamo ve se agora vai
+Meu post legal	vamo tiu	da certo ai
+Meu post legal	vamo ver agora	e ae mano
+Meu post legal	agora vai em	vamo ve
+Meu post legal	caramba em tiu	vai logo
+Meu post legal	agora	vai da certo
+Meu post legal	caramba em	ta foda
+Meu post legal	vaiiii	po
+Meu post legal	vai tiu	da certo ai
+Finalmente Em	agora foi	coisa maravilhosa
+Meu post legal	vamo tiu	agora vai em
+Meu post legal	vamooooooo	pelo amor d deus
+Meu post legal	bora	para mais um test
+E Ae Tiu	vai	vamo
+Meu post legal	bora tiu	vamo da certo em
+Meu post legal	bora	vai da certo agora
+A Naoo	quero	ver nao da certo
+Meu post legal	bora	agora vai
+Testando Ne	vamo	vai
+Meu post legal	vai	vamooo
+Caramba Em	vamo	vaii
+Meu post legal	bora	vamos ver
+Meu post legal	vamo	quero ver não da certo agora
+Aaaaa Naoooo Que Nao Deu Certo	boraa coisa linda	python sempre da certo
