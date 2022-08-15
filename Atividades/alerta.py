@@ -14,7 +14,6 @@ temp <0: ALERTA!!! Frio extremo
 """
 import logging
 import sys
-from types import NoneType
 
 log = logging.Logger("alerta")
 
@@ -32,13 +31,16 @@ for key in info.keys():
         log.error(f"[Error] {key.capitalize()} inválida") 
         sys.exit(1)
 
-if info["temperatura"] > 45:
+temp = info["temperatura"]
+umidade = info["umidade"]
+
+if temp > 45:
     print("ALERTA!!! perigo calor extremo")
-elif (info["temperatura"] * 3) >= info["umidade"]:
+elif (temp * 3) >= umidade:
     print("ALERTA!!! Perigo de calor úmido")
-elif info["temperatura"] >= 10 and info["temperatura"] <= 30:
+elif temp >= 10 and temp <= 30:
     print("Normal")
-elif info["temperatura"] >= 0 and info["temperatura"] <= 10:
+elif temp >= 0 and temp <= 10:
     print("Frio")
 else:
     print("ALERTA!!! Frio extremo")
