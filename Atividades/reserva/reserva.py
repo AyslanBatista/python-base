@@ -30,44 +30,85 @@ Se outro usuário tentar reservar o mesmo quarto o programa deve exibir uma
 mensagem informando que já está reservado.
 
 """
+import logging
 import os
 import sys
 
-path = os.curdir
-filepath_quartos = os.path.join(path, "quartos.txt")
-filepath_reserva = os.path.join(path, "reservas.txt")
 
 # Apresentação
 while True:
+    
+    ocupados = {}
+    try:
+        for line in open("reservas.txt"):
+            nome, num_quarto, dias = line.strip().split(",")
+            ocupados[int(num_quarto)] = {  # Chave primary, com os valores
+                "nome": nome,
+                "dias": dias, 
+            }
+    except FileNotFoundError:
+        logging.error("Arquivo reservas.txt não existe")
+        sys.exit(1)            
+    
+    # SETANDO VARIAVEIS
+    quartos = {}
+    try:
+        for line in open("quartos.txt"):
+            l_numero, l_quarto, l_valor = line.strip().split(",")
+            quartos[int(l_numero)] = {  # Chave primary, com os valores
+                "nome": l_quarto,
+                "preco": float(l_valor),  # TODO: Decimal
+                "disponivel": False if int(l_numero) in ocupados else True
+            }
+    except FileNotFoundError:
+        logging.error("Arquivo quartos.txt não existe")
+        sys.exit(1)
+
+    # PAINEL INICIAL
     print("{:-^60}".format("Hotel - Reserva para Dev's"))
-    for line in open(filepath_quartos):
-        l_numero, l_quarto, l_valor = line.split(",")
+    for codigo, dados in quartos.items():
+        nome = dados["nome"]
+        preco = dados["preco"]
+        disponivel = "⛔️" if not dados["disponivel"] else "👍"
+        # disponivel = dados['disponivel'] and "👍" or "⛔️"
+        # TODO: Substituir casa decimal por virgula
         print(
             "{:^60}".format(
-                f"Numero:{l_numero} | Modelo:{l_quarto} | Valor:R${l_valor}"
+                f"Numero:{codigo} | Modelo:{nome} | Valor:R${preco:.2f} | {disponivel}"
             )
         )
     print("-" * 60, "\n")
 
-    # Variaveis
+    # RECOLHENDO INFORMAÇÃO DO USUARIO
     cliente = input("Qual seu nome: ").strip()
     sair = True
     while sair == True:
-        
-        numero_quarto = int(input("Qual o número do quarto a ser reservado: "))
-        for line in open(filepath_reserva).readlines():
-            r_cliente, r_numero, r_qtd_dias = line.split(",")
-            if numero_quarto == int(r_numero):
-                print("Desculpe esse quarto não está disponível no momento")
+        try:
+            numero_quarto = int(
+                input("Qual o número do quarto a ser reservado: ")
+            )
+            if not quartos[numero_quarto]["disponivel"]:
+                print(
+                    f"Desculpe o quarto {numero_quarto} não está disponível no momento"
+                )
                 sair = True
-                break
-            else:
-                sair = False
+                continue     
+        except ValueError:
+            logging.error("Número inválido, digite apenas digitos.")
+            sys.exit(1)
+        except KeyError:
+            sair = True
+            print(f"O Quarto {numero_quarto} não existe")
+            continue
+        sair = False
         
+        
+    try:
+        qtd_dias = int(input("Qual a quantidade de dias: "))
+    except ValueError:
+        logging.error("Número inválido, digite apenas digitos.")
 
-    qtd_dias = int(input("Qual a quantidade de dias: "))
-
-    for line in open(filepath_quartos):
+    for line in open("quartos.txt"):
         numero, quarto, valor = line.split(",")
         if numero_quarto == int(numero):
             valor_total = int(valor) * qtd_dias
@@ -81,7 +122,7 @@ while True:
     if confirmacao.lower() == "n":
         continue
     elif confirmacao.lower() == "y":
-        with open(filepath_reserva, "a") as file_:
+        with open("reservas.txt", "a") as file_:
             file_.write(f"{cliente},{numero},{qtd_dias}" + "\n")
         print(
             f"\nReserva do quarto Numero:{numero} - `{quarto}` por {qtd_dias} "
