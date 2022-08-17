@@ -41,17 +41,25 @@ filepath_reserva = os.path.join(path, "reservas.txt")
 while True:
     print("{:-^60}".format("Hotel - Reserva para Dev's"))
     for line in open(filepath_quartos):
-        numero, quarto, valor = line.split(",")
+        l_numero, l_quarto, l_valor = line.split(",")
         print(
             "{:^60}".format(
-                f"Numero:{numero} | Modelo:{quarto} | Valor:R${valor}"
+                f"Numero:{l_numero} | Modelo:{l_quarto} | Valor:R${l_valor}"
             )
         )
     print("-" * 60, "\n")
 
     # Variaveis
     cliente = input("Qual seu nome: ").strip()
-    numero_quarto = int(input("Qual o número do quarto a ser reservado: "))
+    while True:
+        numero_quarto = int(input("Qual o número do quarto a ser reservado: "))
+        for line in open(filepath_reserva).readlines():
+            r_cliente, r_numero, r_qtd_dias = line.split(",")
+            if numero_quarto == int(r_numero):
+                print("Desculpe esse quarto não está disponível no momento")
+                break
+        
+
     qtd_dias = int(input("Qual a quantidade de dias: "))
 
     for line in open(filepath_quartos):
@@ -62,6 +70,7 @@ while True:
                 f"Reserva do quarto {quarto} por {qtd_dias} dias "
                 f"fica no valor de total de R${valor_total}"
             )
+            break
 
     confirmacao = input("Deseja confirmar a reserva? (y/n)").strip()
     if confirmacao.lower() == "n":
@@ -69,3 +78,9 @@ while True:
     elif confirmacao.lower() == "y":
         with open(filepath_reserva, "a") as file_:
             file_.write(f"{cliente},{numero},{qtd_dias}" + "\n")
+        print(
+            f"\nReserva do quarto Numero:{numero} - `{quarto}` por {qtd_dias} "
+            f"dias, para o cliente {cliente} registrada com Sucesso!\n"
+        )
+        print("#" * 60)
+        sys.exit(0)
