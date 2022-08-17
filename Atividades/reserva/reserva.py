@@ -51,13 +51,18 @@ while True:
 
     # Variaveis
     cliente = input("Qual seu nome: ").strip()
-    while True:
+    sair = True
+    while sair == True:
+        
         numero_quarto = int(input("Qual o número do quarto a ser reservado: "))
         for line in open(filepath_reserva).readlines():
             r_cliente, r_numero, r_qtd_dias = line.split(",")
             if numero_quarto == int(r_numero):
                 print("Desculpe esse quarto não está disponível no momento")
+                sair = True
                 break
+            else:
+                sair = False
         
 
     qtd_dias = int(input("Qual a quantidade de dias: "))

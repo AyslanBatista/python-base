@@ -4,3 +4,5 @@ Ayslan,4,4
 Bruno,4,3
 Bruno,4,4
 Ricardo,2,3
+Ayslan,3,9
+Bruno,1,10
