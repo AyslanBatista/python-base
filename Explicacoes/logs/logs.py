@@ -4,8 +4,7 @@ import os
 from logging import handlers
 
 #BOILERPLATE
-# TODO: usar função
-# TODO: usar lib (loguru)
+# TODO: Mover para um modulo de utilidades
 # Controle de logs para o usuario que irá fazer a execução do programa
 log_level = os.getenv("LOG_LEVEL", "WARNING").upper()
 # Nossa instancia de log

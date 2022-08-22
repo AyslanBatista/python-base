@@ -53,11 +53,27 @@ fh.setFormatter(fmt)  # Adicionando a formatação de log
 log.addHandler(fh)
 
 
+# Diretorio atual
+path = os.curdir
+# Criando um arquivo e salvando o caminho
+filepath = os.path.join(path, "historico.log")
+# Horario que foi executado
+timestamp = datetime.now().isoformat()
+# Usuario que está executando o comando
+user = os.getenv("USER", "anonymous")
+
+
+# Variavel
+arguments = sys.argv[1:]
+valid_operations = {
+    "sum": lambda a, b: a + b,
+    "sub": lambda a, b: a - b,
+    "mul": lambda a, b: a * b,
+    "div": lambda a, b: a / b,
+}
 
 while True:
-    
-    # Variavel
-    arguments = sys.argv[1:]
+
     # Validacao
     if not arguments:
         operation = input("Operação: ")
@@ -66,8 +82,6 @@ while True:
         arguments = [operation, n1, n2]
 
     operation, *nums = arguments
-
-    valid_operations = ("sum", "sub", "mul", "div")
 
     if operation not in valid_operations:
         print("Operação inválida")
@@ -97,28 +111,10 @@ while True:
         print("ex: `sum 5 5`")
         sys.exit(1)
 
-
-    # TODO: usar dict de funcoes
-    if operation == "sum":
-        result = n1 + n2
-    elif operation == "sub":
-        result = n1 - n2
-    elif operation == "mul":
-        result = n1 * n2
-    elif operation == "div":
-        result = n1 / n2
+    # Utilizando uma função lambda para fazer o calculo
+    result = valid_operations[operation](n1, n2)
 
     print(f"O resultado é {result}")
-    
-    # Diretorio atual
-    path = os.curdir
-    # Criando um arquivo e salvando o caminho
-    filepath = os.path.join(path, "historico.log")
-    # Horario que foi executado
-    timestamp = datetime.now().isoformat()
-    # Usuario que está executando o comando
-    user = os.getenv("USER", "anonymous")
-
 
     # Editando o arquivo com o resultado do calculo
     try:
@@ -133,6 +129,8 @@ while True:
 
     # Segundo metodo que não é muito utilizado
     # print(f"{operation},{n1},{n2} = {result}", file=open(filepath, "a"))
-    
+
+    arguments = None
+
     if input("Pressione enter para continuar, qualquer tecla para sair"):
         break
