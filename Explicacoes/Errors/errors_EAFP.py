@@ -10,7 +10,9 @@ import time
 
 log = logging.Logger("erros")
 
-# EAFP - Easy to ASk Forgiveness than permission - É mais fácil perdir perdão do que permissão
+# EAFP - Easy to ASk Forgiveness than permission -
+# É mais fácil perdir perdão do que permissão
+
 
 # Retry com FOR
 def try_to_opan_a_file_for(filepath, retry=1) -> list:
@@ -39,7 +41,7 @@ def try_to_opan_a_file(filepath, retry=1) -> list:
     """Tries to open a sile, if error, retries n times."""
     if retry > 999:
         raise ValueError("Retry cannot be above 999")
-    
+
     try:
         return open(filepath).readlines()
     except FileNotFoundError as e:
