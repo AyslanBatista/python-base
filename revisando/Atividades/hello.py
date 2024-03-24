@@ -20,7 +20,7 @@ Execução:
     ou
     ./hello.py
 """
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 __author__ = "Ayslan Batista"
 __license__ = "Unlicense"
 
@@ -41,8 +41,17 @@ msg = {
 }
 
 for arg in sys.argv[1:]:
-    # TODO: Tratar ValueError
-    key, value = arg.split("=")
+
+    try:
+        key, value = arg.split("=")
+    except ValueError as e:
+        # TODO: Logging
+        print(f"[ERROR] {str(e)}")
+        print("You need to use `=`")
+        print(f"You passed {arg}")
+        print("try with --key=value")
+        sys.exit(1)
+
     key = key.lstrip("-").strip()
     value = value.strip()
     if key not in arguments:
@@ -61,5 +70,21 @@ if current_language is None:
 current_language = current_language[:5]
 
 
+# EAFP
+try:
+    message = msg[current_language]
+except KeyError as e:
+    print(f"[ERROR] {str(e)}")
+    print(f"Language is invalid, choose from: {list(msg.keys())}")
+    sys.exit(1)
+
+
+"""
+# Try com valor default
+message = msg.get(
+    current_language, msg["en_US"]
+)
+"""
+
 # O(1) - constante - `in`
-print(msg[current_language] * int(arguments["count"]))
+print(message * int(arguments["count"]))

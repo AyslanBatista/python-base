@@ -41,11 +41,23 @@ if arguments[0] == "read":
             print("-" * 30)
 
 if arguments[0] == "new":
-    title = arguments[1]  # TODO: tratar exception
-    text = [
-        f"{title}\n",
-        input("tag: ").strip(),
-        input("text:\n").strip(),
-    ]
-    with open(filepath, "a") as file_:
-        file_.write("\t".join(text) + "\n")
+    try:
+        title = arguments[1]  # TODO: tratar exception
+        text = [
+            f"{title}\n",
+            input("tag: ").strip(),
+            input("text:\n").strip(),
+        ]
+    except IndexError as e:
+        print(f"[ERROR] {str(e)}")
+        print("You need to enter a tittle")
+        print("Ex: notes.py new 'My note'")
+        sys.exit(1)
+
+    try:
+        with open(filepath, "a") as file_:
+            file_.write("\t".join(text) + "\n")
+    except PermissionError as e:
+        # TODO: Logging
+        print(str(e))
+        sys.exit(1)

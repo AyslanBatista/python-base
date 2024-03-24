@@ -20,7 +20,7 @@ n2: 4
 
 Os resultados serão salvos em `infixcalc.log`
 """
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 __author__ = "Ayslan"
 __license__ = "Unlicense"
 
@@ -31,7 +31,7 @@ from datetime import datetime
 
 arguments = sys.argv[1:]
 
-# TODO: Exceptions
+# Validação
 if not arguments:
     operation = input("Operação: ")
     n1 = input("n1: ")
@@ -67,7 +67,10 @@ for num in nums:
 
     validated_nums.append(num)
 
-n1, n2 = validated_nums
+try:
+    n1, n2 = validated_nums
+except ValueError as e:
+    print(str(e))
 
 # TODO: usar dict de funcoes
 if operation == "sum":
@@ -79,12 +82,19 @@ elif operation == "mul":
 elif operation == "div":
     result = n1 / n2
 
+print(f"O resultado é {result}")
+
 path = os.curdir
 filepath = os.path.join(path, "infixcalc.log")
 timestamp = datetime.now().isoformat()
 user = os.getenv("USER", "anonymous")
 
-with open(file=filepath, mode="a") as file_:
-    file_.write(f"{timestamp} - {user} {operation}, {n1}, {n2} = {result}\n")
-
-print(f"O resultado é {result}")
+try:
+    with open(file=filepath, mode="a") as file_:
+        file_.write(
+            f"{timestamp} - {user} {operation}, {n1}, {n2} = {result}\n"
+        )
+except PermissionError as e:
+    # TODO: Logging
+    print(str(e))
+    sys.exit(1)
