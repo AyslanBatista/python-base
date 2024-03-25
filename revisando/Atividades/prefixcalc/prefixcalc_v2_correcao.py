@@ -25,9 +25,28 @@ __author__ = "Ayslan"
 __license__ = "Unlicense"
 
 
+import logging
 import os
 import sys
 from datetime import datetime
+from logging import handlers
+
+# CONFIGURAÇÂO DO LOG
+log_level = os.getenv("LOG_LEVEL", "WARNING").upper()
+log = logging.Logger("ayslan", log_level)
+fh = handlers.RotatingFileHandler(
+    "historico.log",
+    maxBytes=10**6,
+    backupCount=10,
+)
+fh.setLevel(log_level)
+fmt = logging.Formatter(
+    "%(asctime)s %(name)s %(levelname)s "
+    "l:%(lineno)d f:%(filename)s: %(message)s"
+)
+fh.setFormatter(fmt)
+log.addHandler(fh)
+
 
 arguments = sys.argv[1:]
 
@@ -95,6 +114,6 @@ try:
             f"{timestamp} - {user} {operation}, {n1}, {n2} = {result}\n"
         )
 except PermissionError as e:
-    # TODO: Logging
+    log.error("%s", str(e))
     print(str(e))
     sys.exit(1)
