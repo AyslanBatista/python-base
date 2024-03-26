@@ -19,6 +19,7 @@ log = logging.Logger("alerta")
 
 # TODO: Mover para módulo de utilidades
 
+
 def is_completely_filled(dict_of_inputs: dict) -> bool:
     """Returns a boolean telling if a dict is completely filled."""
     info_size = len(dict_of_inputs)
