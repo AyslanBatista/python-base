@@ -2,25 +2,23 @@
 """ Cadastro de produto
 """
 __version__ = "0.1.0"
-__author__ = "Ayslan"
+__author__ = "Ayslan Batista"
 __license__ = "Unlicense"
 
 from pprint import pprint
 
 # Dicionario
 produto = {
-	"nome": "Caneta",
-	"cores": ["azul","branco"],
-	"preco": 3.23,
+    "nome": "Caneta",
+    "cores": ["azul", "branco"],
+    "preco": 3.23,
     "dimensao": {"altura": 12.1, "lagura": 0.8},
-	"em_estoque": True,
-	"codigo": 45678,
-	"codebar": None,
+    "em_estoque": True,
+    "codigo": 45678,
+    "codebar": None,
 }
 
-cliente = {
-    "nome": "Bruno"
-}
+cliente = {"nome": "Bruno"}
 
 compra = {
     "cliente": cliente,
@@ -34,4 +32,4 @@ pprint(
     f"O cliente {compra['cliente']['nome']} "
     f"comprou {compra['quantidade']} unidades de {compra['produto']['nome']} "
     f"e pagou o total de {total_compra}"
-    )
+)

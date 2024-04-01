@@ -1,7 +1,10 @@
+"""Organizando o codigo com funções"""
+
 
 def welcome():
     print("Welcome to the test.")
     input("When you are ready press enter.")
+
 
 def ask_questions(ask_color=False):
     name = input("name:")
@@ -14,9 +17,11 @@ def ask_questions(ask_color=False):
     input("Describe yourself")
     print("admirable!")
 
+
 def goodbye():
     print("Goodbye.")
-    
+
+
 welcome()
 ask_questions(ask_color=True)
 goodbye()

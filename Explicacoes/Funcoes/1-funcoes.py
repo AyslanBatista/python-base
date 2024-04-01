@@ -7,7 +7,8 @@ f(x) = 5 * (x / 2)
 """
 
 # Solid - Single Responsibility - A função deve resolver apenas um problema
-# Toda função tem um retorno, caso não seja informado um return, retorno será None
+# Toda função tem um retorno, caso não seja informado um return,
+# retorno será None
 
 
 def f(x):  # assinatura
@@ -25,7 +26,9 @@ print(valor == 50)
 
 
 def print_in_upper(text):
+    """Procedure with no explict return"""
     print(text.upper())
+    # implicit return None
 
 
 print_in_upper("bruno")
@@ -45,10 +48,12 @@ def heron(a, b, c):
     perimeter = a + b + c
     s = perimeter / 2
     area = s * (s - a) * (s - b) * (s - c)
-    return area ** 0.5 # math.sqrt(area)
+    return area**0.5  # math.sqrt(area)
+
 
 def heron2(params):
     return heron(*params)
+
 
 triangulos = [
     (3, 4, 5),
@@ -58,15 +63,12 @@ triangulos = [
     (3, 4, 5),
     (5, 12, 13),
     (8, 15, 17),
-    (12, 35, 37)
+    (12, 35, 37),
 ]
 
-#Map, aplique a função heron2 para cada elemento de triangulos
+# Map, aplique a função heron2 para cada elemento de triangulos
 print(list(map(heron2, triangulos)))
 
 for t in triangulos:
-    area = heron(*t) # Desempacotar os valores de uma tupla
+    area = heron(*t)  # Desempacotar os valores de uma tupla
     print(f"A area do tringulo é: {area}")
-    
-
-

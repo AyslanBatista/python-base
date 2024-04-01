@@ -1,60 +1,42 @@
 #!/usr/bin/env python3
-""" Template para enviar e-mail com informações de cada cliente
-
- Olá, Maria
-    
-    Tem interesse em comprar caneta?
-    
-    Este produto é ótimo para resolver
-    Escrever muito bem
-    
-    Clique agora em https://canetaslegais.com
-    
-    Apenas 1 disponiveis!
-    
-    Preço promocional 50.50
-"""
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 __author__ = "Ayslan"
 __license__ = "Unlicense"
 
 import os
 import smtplib
 import sys
-from email.mime.text import MIMEText  # TEMPLATE PRONTO
+from email.mime.text import MIMEText
 
-# Argumento na linha de comando
 arguments = sys.argv[1:]
-
-# Validação
 if not arguments:
-    print("informe o nome do arquivo de emails")
+    print("informa o nome do arquivo de emails")
+    sys.exit(1)
+
 filename = arguments[0]
 templatename = arguments[1]
 
-# Caminho do arquivo que vai ser lido os emails
 path = os.curdir
-filepath = os.path.join(path, "emails.txt")
-templatepath = os.path.join(path, templatename)
+filepath = os.path.join(path, "emails.txt")  # emails.txt
+templatepath = os.path.join(path, "email_tmpl.txt")  # email_tmpl.txt
 
 with smtplib.SMTP(host="localhost", port=8025) as server:
 
-    for line in open(filepath):
+    for line in open(file=filepath):
         name, email = line.split(",")
-        text = (
-            open(templatepath).read() % {
+
+        text = open(templatepath).read() % {
             "nome": name,
             "produto": "caneta",
             "texto": "Escrever muito bem",
             "link": "https://canetaslegais.com",
             "quantidade": 1,
             "preco": 50.5,
-              }
-        )
+        }
 
         from_ = "bruno@rocha.com"
         to = ", ".join([email])
-        
+
         message = MIMEText(text)
         message["Subject"] = "Compre mais"
         message["From"] = from_

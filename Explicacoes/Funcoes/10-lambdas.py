@@ -1,7 +1,5 @@
 # Função lambda =  a uma unica expressão
 # Digamos que tenhamos uma coleção de utilidades
-
-
 def transforma_em_maiusculo(texto):
     return texto.upper()
 

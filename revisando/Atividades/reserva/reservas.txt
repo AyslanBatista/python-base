@@ -1,4 +1,0 @@
-#Nome, quarto, dia
-Ayslan,1,10
-Bruno,2,90
-Luan,4,50

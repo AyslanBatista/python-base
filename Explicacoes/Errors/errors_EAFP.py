@@ -49,7 +49,7 @@ def try_to_opan_a_file(filepath, retry=1) -> list:
         time.sleep(1)
         if retry > 1:
             return try_to_opan_a_file(filepath, retry=retry - 1)
-        # DEADLOCK
+        # DEADLOCK | ERRO DE RECURSÃO
     except ZeroDivisionError:
         print("[Error] You cant divide by zero!!!")
         sys.exit(1)

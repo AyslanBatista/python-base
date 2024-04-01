@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Faça um programa que impre os números pares de 1 a 200
 ex
@@ -10,18 +9,11 @@ ex
 ...
 """
 
+# Modo Normal
+for numero in range(1, 201):
+    if not numero % 2:
+        print(numero)
 
-# Utilizando for
-for n in range(1, 201):
-    if n % 2 != 0:
-        continue
-    print(n)
-
-# Utilizando while
-n = 0
-while n < 201:
-    if n % 2 != 0:
-        n += 1
-        continue
-    print(n)
-    n += 1
+# List Comprehension
+numeros_pares = [n for n in range(1, 201) if not n % 2]
+print(numeros_pares)

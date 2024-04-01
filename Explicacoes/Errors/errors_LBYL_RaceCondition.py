@@ -7,7 +7,8 @@ __license__ = "Unlicense"
 import os
 import sys
 
-# LBYL - Look Before You Leap >> Olhe antes de atravessar a rua | Antes de fazer uma operação verifique se é possível fazer essa operação
+# LBYL - Look Before You Leap >> Olhe antes de atravessar a rua |
+# Antes de fazer uma operação verifique se é possível fazer essa operação
 if os.path.exists("names.txt"):
     print("O arquivo existe")
     input("...")  # Race Condition

@@ -17,8 +17,6 @@ import sys
 
 log = logging.Logger("alerta")
 
-# TODO: Mover para módulo de utilidades
-
 
 def is_completely_filled(dict_of_inputs: dict) -> bool:
     """Returns a boolean telling if a dict is completely filled."""
@@ -29,7 +27,7 @@ def is_completely_filled(dict_of_inputs: dict) -> bool:
     return info_size == filled_size
 
 
-def read_inputs_for_dict(dict_of_info: dict):
+def read_inputs_for_dict(dict_of_info: dict) -> None:
     """Reads information for a dict from user input."""
     for key in dict_of_info.keys():
         if dict_of_info[key] is not None:
@@ -41,6 +39,7 @@ def read_inputs_for_dict(dict_of_info: dict):
             break  # para o for
 
 
+# PROGRAMA PRINCIPAL
 info = {"temperatura": None, "umidade": None}
 
 print("{:-^50}".format("Alarme De Temperatura"))

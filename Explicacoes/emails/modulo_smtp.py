@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-# python -m smtpd -c DebuggingServer -n localhost:8025 
+# python -m smtpd -c DebuggingServer -n localhost:8025
 
 """Exemplos de envio de e-mail"""
 
 import smtplib
 
 SERVER = "localhost"
-PORT = 8025  # 25 TCP PADRAO DE E-MAIL
+PORT = 8025  # 25 TCP PADRAO DE E-MAIL | 8025 para servidor de teste local
 
 
 FROM = "bruno@rocha.com"

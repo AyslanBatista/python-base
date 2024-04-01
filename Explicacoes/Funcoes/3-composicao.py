@@ -20,10 +20,13 @@ print()
 
 # estilo procedural - Utiliza menas memoria
 print("Estilo procedural")
+
+
 def starts_with_b(text):
     """Return bool if text starts with b"""
     return text[0].lower() == "b"
     # return text.lower().startswith("b")
+
 
 filtro = filter(starts_with_b, names)
 filtro = list(filtro)
